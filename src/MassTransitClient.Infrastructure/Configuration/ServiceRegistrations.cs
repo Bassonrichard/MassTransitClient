@@ -76,7 +76,7 @@ namespace MassTransitClient.Infrastructure.Configuration
             .Enrich.WithProperty("ApplicationName", applicationName)
             .Enrich.FromLogContext()
             .Destructure.With(new JsonDestructuringPolicy())
-            .WriteTo.Console());
+            .WriteTo.Async(l => l.Console()));
 
             return builder;
         }
