@@ -8,6 +8,7 @@ using System.Threading;
 
 namespace MassTransitClient.Benchmark
 {
+    [MemoryDiagnoser]
     public class MassTransitClientBenchmark
     {
         private readonly IPublishProvider _publishProvider;
@@ -20,13 +21,13 @@ namespace MassTransitClient.Benchmark
         }
 
 
-        [Benchmark(OperationsPerInvoke = RequestsPerSecond)]
+        [Benchmark()]
         public async Task PublishAsync()
         {
             await _publishProvider.PublishAsync(new Message { Text = "" }, null, CancellationToken.None);
         }  
 
-        [Benchmark(OperationsPerInvoke = RequestsPerSecond)]
+        [Benchmark()]
         public async Task SendAsync()
         {
             await _publishProvider.SendAsync(new Message { Text = "" }, "message");
